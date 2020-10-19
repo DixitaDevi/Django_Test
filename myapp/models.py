@@ -13,10 +13,8 @@ class User(models.Model):
 class Notes(models.Model):
     title = models.CharField(max_length = 200)
     description = models.CharField(max_length = 1500, null=True, blank=True)
-    image=models.ImageField(upload_to = 'images/', null=True, blank=True)
     added_date = models.DateTimeField(auto_now_add=True)
     submitted_by = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
-

@@ -45,12 +45,13 @@ def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
-
+@login_required(login_url='login')
 def home(request):
     notes = Notes.objects.all()
     users = User.objects.all()
     return render(request, "home.html", {'notes': notes, 'users': users})
 
+@login_required(login_url='login')
 def user(request, pk_test):
     user = User.objects.get(id=pk_test)
     notes = user.notes_set.all()
@@ -58,7 +59,7 @@ def user(request, pk_test):
     context = {'user': user, 'notes': notes}
     return render(request, "users.html", context)
 
-
+@login_required(login_url='login')
 def createNote(request):
     form = NoteForm()
     if request.method == "POST":
@@ -69,7 +70,7 @@ def createNote(request):
     context = {'form': form}
     return render(request, 'note_form.html', context)
 
-
+@login_required(login_url='login')
 def updateNote(request, pk):
     note = Notes.objects.get(id=pk)
     form = NoteForm(instance=note)
@@ -81,6 +82,7 @@ def updateNote(request, pk):
     context = {'form': form}
     return render(request, 'note_form.html', context)
 
+@login_required(login_url='login')
 def deleteNote(request, pk):
     note = Notes.objects.get(id=pk)
     if request.method == "POST":
