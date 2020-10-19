@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<br>
+ <div class="row">
+     <div class="col-md">
+         <div class="card card-body">
+             <h5>Notes</h5>
+         </div>
+         <div class="card card-body">
+            {% for i in notes %}
+            <div class="card">
+                <img class="rounded mx-auto d-block" src="{{i.image.url}}" alt="Card image cap">
+
+                <div class="card-body">
+                  <h5 class="card-title">{{i.title}}</h5>
+                  <p class="card-text">{{i.description}}</p>
+                  <p class="card-text"><a href="{% url 'user' i.submitted_by.id %}">{{i.submitted_by}}</a></p>
+                  <p class="card-footer">{{i.added_date}}</p>
+                </div>
+              </div>
+            {% endfor %}
+         </div>
+     </div>
+ </div>
+{% endblock %}

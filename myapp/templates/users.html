@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body text-center">
+            <h5>{{user.name}}</h5>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <br>
+            <p>Email: {{user.email}}</p>
+            <p>Phone: {{user.phone}}</p>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>{{user.name}}'s Notes</h5>
+            <br>
+            <h1 style="text-align: center; padding: 10px;">{{notes.count}}</h1>
+        </div>
+    </div>
+</div>
+<br>
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            {% for i in notes %}
+            <div class="card">
+                <img class="card-img-top" src="{{i.image.url}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{i.title}}</h5>
+                  <p class="card-text">{{i.description}}</p>
+                  <p class="card-text">{{i.added_date}}</p>
+                  <p class="card-footer">
+                    <a class="btn btn-sm btn-info" href="{% url 'update_note' i.id%}">Update</a> 
+                    <a class="btn btn-sm btn-danger" href="{% url 'delete_note' i.id%}">Delete</a>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}
